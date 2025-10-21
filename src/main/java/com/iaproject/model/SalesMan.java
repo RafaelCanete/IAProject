@@ -10,12 +10,18 @@ public class SalesMan {
     private String lastname;
     private Integer sid;
     private List<SocialPerformanceRecord> socialPerformanceRecords;
+    private String jobTitle;
+    private String subUnit;
+    private String supervisor;
 
-    public SalesMan(String firstname, String lastname, Integer sid, List<SocialPerformanceRecord> performanceRecords) {
+    public SalesMan(String firstname, String lastname, Integer sid, List<SocialPerformanceRecord> performanceRecords, String jobTitle, String subUnit, String supervisor) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.sid = sid;
         this.socialPerformanceRecords = performanceRecords;
+        this.jobTitle = jobTitle;
+        this.subUnit = subUnit;
+        this.supervisor = supervisor;
     }
 
     public void addPerformanceRecord(SocialPerformanceRecord record) {
@@ -56,5 +62,29 @@ public class SalesMan {
         document.append("lastname" , this.lastname );
         document.append("sid" , this.sid);
         return document;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getSubUnit() {
+        return subUnit;
+    }
+
+    public void setSubUnit(String subUnit) {
+        this.subUnit = subUnit;
+    }
+
+    public String getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(String supervisor) {
+        this.supervisor = supervisor;
     }
 }

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         ManagePersonalImpl impl = new ManagePersonalImpl();
 
-        SalesMan john = new SalesMan("John", "Doe", 1, new ArrayList<>());
+        SalesMan john = new SalesMan("John", "Doe", 1, new ArrayList<>(), "", "Sales", "");
         impl.createSalesMan(john);
 
         SocialPerformanceRecord johnRecord1 = new SocialPerformanceRecord("April", 10);
@@ -20,11 +20,11 @@ public class Main {
         SocialPerformanceRecord johnRecord2 = new SocialPerformanceRecord("May", 15);
         impl.addSocialPerformanceRecord(johnRecord2, john);
 
-        SalesMan alice = new SalesMan("Alice", "Zoric", 2, new ArrayList<>());
-        impl.createSalesMan(alice);
+        SalesMan chantal = new SalesMan("Chantal", "Banks", 2, new ArrayList<>(), "HR Senior Consultant", "HR", "Michael Moore");
+        impl.createSalesMan(chantal);
 
-        SocialPerformanceRecord aliceRecord1 = new SocialPerformanceRecord("April", 10);
-        impl.addSocialPerformanceRecord(aliceRecord1, alice);
+        SocialPerformanceRecord chantalRecord1 = new SocialPerformanceRecord("April", 10);
+        impl.addSocialPerformanceRecord(chantalRecord1, chantal);
 
 
         System.out.println("Salesman und Performance Records erfolgreich angelegt!\n");
@@ -35,6 +35,7 @@ public class Main {
             System.out.println("  Name: " + found.getFirstname() + " " + found.getLastname());
             System.out.println("  ID: " + found.getId());
         }
+
 
         List<SalesMan> all = impl.readAllSalesMen();
         System.out.println("\n Alle Salesmen in der Datenbank:");
@@ -49,5 +50,6 @@ public class Main {
         }
 
         System.out.println("\n Programm erfolgreich ausgeführt!");
+
     }
 }

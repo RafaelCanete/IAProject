@@ -28,9 +28,17 @@ public class ManagePersonalImpl implements ManagePersonal {
         Document doc = new Document("sid", salesman.getId())
                 .append("firstname", salesman.getFirstname())
                 .append("lastname", salesman.getLastname())
-                .append("socialPerfomanceRecords", salesman.getSocialPerformanceRecords());
+                .append("socialPerfomanceRecords", salesman.getSocialPerformanceRecords())
+                .append("jobTitle", salesman.getJobTitle())
+                .append("subUnit", salesman.getSubUnit())
+                .append("supervisor", salesman.getSupervisor());
         salesmanCollection.insertOne(doc);
         System.out.println("Added salesman: " + salesman.getFirstname() + " " + salesman.getLastname());
+    }
+
+    @Override
+    public void deleteSalesMan(int sid) {
+        salesmanCollection.deleteOne(eq("sid", sid));
     }
 
     @Override
@@ -67,8 +75,11 @@ public class ManagePersonalImpl implements ManagePersonal {
         return new SalesMan(
                 doc.getString("firstname"),
                 doc.getString("lastname"),
-                sid,
-                records
+                doc.getInteger("sid"),
+                records,
+                doc.getString("jobTitle"),
+                doc.getString("subUnit"),
+                doc.getString("supervisor")
         );
     }
 
@@ -93,7 +104,10 @@ public class ManagePersonalImpl implements ManagePersonal {
                         doc.getString("firstname"),
                         doc.getString("lastname"),
                         doc.getInteger("sid"),
-                        records
+                        records,
+                        doc.getString("jobTitle"),
+                        doc.getString("subUnit"),
+                        doc.getString("supervisor")
                 );
 
                 salesmen.add(salesman);
