@@ -1,14 +1,14 @@
 package com.iaproject.model;
 
 public class SocialPerformanceRecord {
-    private String month;
+    private String skill;
     private int socialScore;
 
-    public SocialPerformanceRecord(String month, int socialScore) {
-        this.month = month;
+    public SocialPerformanceRecord(String skill, int socialScore) {
+        this.skill = skill;
         this.socialScore = socialScore;
     }
 
-    public String getMonth() { return month; }
+    public String getSkill() { return skill; }
     public int getSocialScore() { return socialScore; }
 }

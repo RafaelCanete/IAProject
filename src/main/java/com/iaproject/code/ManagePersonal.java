@@ -13,6 +13,8 @@ public interface ManagePersonal {
     public void addSocialPerformanceRecord(SocialPerformanceRecord record , SalesMan salesMan );
     // Remark: an SocialPerformanceRecord corresponds to part B of a bonus sheet
 
+    public void deleteSocialPerformanceRecord(SalesMan salesman, String skill);
+
     public SalesMan readSalesMan(int sid );
 
     public List<SalesMan> readAllSalesMen();

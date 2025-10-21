@@ -14,16 +14,16 @@ public class Main {
         SalesMan john = new SalesMan("John", "Doe", 1, new ArrayList<>(), "", "Sales", "");
         impl.createSalesMan(john);
 
-        SocialPerformanceRecord johnRecord1 = new SocialPerformanceRecord("April", 10);
+        SocialPerformanceRecord johnRecord1 = new SocialPerformanceRecord("Openness to Employees", 4);
         impl.addSocialPerformanceRecord(johnRecord1, john);
 
-        SocialPerformanceRecord johnRecord2 = new SocialPerformanceRecord("May", 15);
+        SocialPerformanceRecord johnRecord2 = new SocialPerformanceRecord("Communication Skills", 3);
         impl.addSocialPerformanceRecord(johnRecord2, john);
 
         SalesMan chantal = new SalesMan("Chantal", "Banks", 2, new ArrayList<>(), "HR Senior Consultant", "HR", "Michael Moore");
         impl.createSalesMan(chantal);
 
-        SocialPerformanceRecord chantalRecord1 = new SocialPerformanceRecord("April", 10);
+        SocialPerformanceRecord chantalRecord1 = new SocialPerformanceRecord("Leadership Competence", 5);
         impl.addSocialPerformanceRecord(chantalRecord1, chantal);
 
 
@@ -46,10 +46,13 @@ public class Main {
         List<SocialPerformanceRecord> records = impl.readSocialPerformanceRecord(john);
         System.out.println("\n Performance Records für " + john.getFirstname() + ":");
         for (SocialPerformanceRecord rec : records) {
-            System.out.println("  Monat: " + rec.getMonth() + ", Score: " + rec.getSocialScore());
+            System.out.println("  Skill: " + rec.getSkill() + ", Score: " + rec.getSocialScore());
         }
 
         System.out.println("\n Programm erfolgreich ausgeführt!");
 
+        impl.deleteSalesMan(2);
+
+        impl.deleteSocialPerformanceRecord(john, "Communication Skills");
     }
 }

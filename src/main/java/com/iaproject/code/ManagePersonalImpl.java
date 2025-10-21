@@ -3,6 +3,7 @@ package com.iaproject.code;
 import com.iaproject.model.SalesMan;
 import com.iaproject.model.SocialPerformanceRecord;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.pull;
 import static com.mongodb.client.model.Updates.push;
 
 import com.mongodb.client.MongoCollection;
@@ -42,16 +43,28 @@ public class ManagePersonalImpl implements ManagePersonal {
     }
 
     @Override
-    public void addSocialPerformanceRecord(SocialPerformanceRecord record, SalesMan salesMan) {
-        Document recordDoc = new Document("month", record.getMonth())
+    public void addSocialPerformanceRecord(SocialPerformanceRecord record, SalesMan salesman) {
+        Document recordDoc = new Document("skill", record.getSkill())
                 .append("socialScore", record.getSocialScore());
 
         salesmanCollection.updateOne(
-                eq("sid", salesMan.getId()),
+                eq("sid", salesman.getId()),
                 push("socialPerfomanceRecords", recordDoc)
         );
 
-        System.out.println("Added performance record for salesman id: " + salesMan.getId());
+        System.out.println("Added performance record for salesman id: " + salesman.getId());
+    }
+
+    @Override
+    public void deleteSocialPerformanceRecord(SalesMan salesman, String skill) {
+        Document recordDoc = new Document("skill", skill);
+
+        salesmanCollection.updateOne(
+                eq("sid", salesman.getId()),
+                pull("socialPerfomanceRecords", recordDoc)
+        );
+
+        System.out.println("Deleted performance record for salesman id: " + salesman.getId());
     }
 
     @Override
@@ -67,7 +80,7 @@ public class ManagePersonalImpl implements ManagePersonal {
         List<SocialPerformanceRecord> records = new ArrayList<>();
         for (Document rec : recordDocs) {
             records.add(new SocialPerformanceRecord(
-                    rec.getString("month"),
+                    rec.getString("skill"),
                     rec.getInteger("socialScore")
             ));
         }
@@ -83,7 +96,6 @@ public class ManagePersonalImpl implements ManagePersonal {
         );
     }
 
-
     @Override
     public List<SalesMan> readAllSalesMen() {
             List<SalesMan> salesmen = new ArrayList<>();
@@ -95,7 +107,7 @@ public class ManagePersonalImpl implements ManagePersonal {
 
                 for (Document rec : recordDocs) {
                     records.add(new SocialPerformanceRecord(
-                            rec.getString("month"),
+                            rec.getString("skill"),
                             rec.getInteger("socialScore")
                     ));
                 }
@@ -109,13 +121,10 @@ public class ManagePersonalImpl implements ManagePersonal {
                         doc.getString("subUnit"),
                         doc.getString("supervisor")
                 );
-
                 salesmen.add(salesman);
             }
-
             return salesmen;
         }
-
 
     @Override
     public List<SocialPerformanceRecord> readSocialPerformanceRecord(SalesMan salesMan) {
@@ -132,7 +141,7 @@ public class ManagePersonalImpl implements ManagePersonal {
 
         for (Document rec : recordDocs) {
             records.add(new SocialPerformanceRecord(
-                    rec.getString("month"),
+                    rec.getString("skill"),
                     rec.getInteger("socialScore")
             ));
         }
