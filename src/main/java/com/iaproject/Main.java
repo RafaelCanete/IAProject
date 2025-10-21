@@ -49,8 +49,6 @@ public class Main {
             System.out.println("  Skill: " + rec.getSkill() + ", Score: " + rec.getSocialScore());
         }
 
-        System.out.println("\n Programm erfolgreich ausgeführt!");
-
         impl.deleteSalesMan(2);
 
         impl.deleteSocialPerformanceRecord(john, "Communication Skills");
